@@ -20,8 +20,8 @@ pipeline {
     stage('Deploy') {
       steps {
         archiveArtifacts 'target/*.war'
-        sh ''' export AWS_ACCESS_KEY_ID=AKIAQANOR7PCPXS7NRHS'''
-        sh ''' export AWS_SECRET_ACCESS_KEY=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'''
+        sh '''export AWS_ACCESS_KEY_ID=AKIAQANOR7PCPXS7NRHS'''
+        sh '''export AWS_SECRET_ACCESS_KEY=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'''
         sh '''aws --debug s3 cp /var/lib/jenkins/workspace/alexa-cicd/target/alexa-cicd-0.0.1-SNAPSHOT.war s3://elasticbeanstalk-us-east-1-000902953924/2018362ew4-alexa-cicd-0.0.1-SNAPSHOT.war 
 '''
         sh 'aws --debug elasticbeanstalk create-application-version --application-name alexacicd --version-label "alexacicd-jenkins$BUILD_DISPLAY_NAME" --description "Created by $BUILD_TAG"  --source-bundle=S3Bucket=elasticbeanstalk-us-east-1-593614531934,S3Key=2018362ew4-alexa-cicd-0.0.1-SNAPSHOT.war'
