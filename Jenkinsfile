@@ -32,10 +32,10 @@ pipeline {
                     sh "AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} \
                         AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} \
                         AWS_REGION=us-east-1 \
-                   aws s3 ls  
                   "
                 }
         archiveArtifacts 'target/*.war'
+        sh '''aws s3 ls'''
         //sh '''export AWS_ACCESS_KEY_ID=\${AWS_ID}'''
         //sh '''export AWS_SECRET_ACCESS_KEY=\${AWS_SECRET}'''
         //sh '''aws --debug s3 cp /var/lib/jenkins/workspace/alexa-cicd/target/alexa-cicd-0.0.1-SNAPSHOT.war s3://elasticbeanstalk-us-east-1-000902953924/2018362ew4-alexa-cicd-0.0.1-SNAPSHOT.war '''
