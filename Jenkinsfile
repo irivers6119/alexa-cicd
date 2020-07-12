@@ -19,6 +19,21 @@ pipeline {
     }
     stage('Deploy') {
       steps {
+        // Example AWS credentials
+        withCredentials(
+                [[
+                    $class: 'AmazonWebServicesCredentialsBinding',
+                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                    credentialsId: '3709303f-bc22-4d32-80b2-cee096454e88',  // ID of credentials in Jenkins
+                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+                ]])
+                {
+                    echo "Listing contents of an S3 bucket."
+                    sh "AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} \
+                        AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} \
+                        AWS_REGION=us-east-1 \
+                    "
+                }
         archiveArtifacts 'target/*.war'
         //sh '''export AWS_ACCESS_KEY_ID=\${AWS_ID}'''
         //sh '''export AWS_SECRET_ACCESS_KEY=\${AWS_SECRET}'''
