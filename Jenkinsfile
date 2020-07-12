@@ -29,9 +29,9 @@ pipeline {
                 ]])
                 {
                     echo "Listing contents of an S3 bucket."
-                    sh "AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} \
-                        AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} \
-                        AWS_REGION=us-east-1 \
+                    sh " export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} \
+                        export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} \
+                        export AWS_REGION=us-east-1 \
                   "
                 }
         archiveArtifacts 'target/*.war'
